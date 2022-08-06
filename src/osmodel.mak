@@ -67,6 +67,11 @@ ifeq (,$(MODEL))
     MODEL:=32
     ARCH:=x86
   endif
+  ifneq (,$(findstring $(uname_M),riscv64))
+    MODEL:=64
+    ARCH:=riscv64
+    CMODEL_FLAG:=-march=rv64gc
+  endif
   ifeq (,$(MODEL))
     $(error Cannot figure 32/64 model and arch from uname -m: $(uname_M))
   endif
